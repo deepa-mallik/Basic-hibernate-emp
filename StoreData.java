@@ -21,17 +21,22 @@ public static void main(String[] args) {
 	//creating transaction object
 	Transaction t=session.beginTransaction();
 		
-	Employee e1=new Employee();
-	e1.setId(102);
-	e1.setFirstName("Roshan");
-	e1.setLastName("Marlia");
+	Employee employee=new Employee(); // can also keep instance null- Employee employee = null; as we are creating instance while session.get() 
 	
-	session.persist(e1);//persisting the object
+//	employee.setId(104);                           Data already present in the database no need of creating while fetching
+//	employee.setFirstName("Roshan");
+//	employee.setLastName("Marlia");
+	
+	//session.persist(employee);//persisting the object
+	
+	employee = (Employee)session.get(Employee.class, 103);    //fetch data from data base
 	
 	t.commit();//transaction is commited
 	session.close();
 	
+	System.out.println(employee);
 	System.out.println("successfully saved");
 	
 }
 }
+
